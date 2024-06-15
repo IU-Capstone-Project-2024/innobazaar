@@ -3,7 +3,7 @@ import React from 'react';
 
 class App extends React.Component {
   
-  state = { details: [], }
+  state = { details: [], products: []}
 
   componentDidMount(){
 
@@ -20,6 +20,7 @@ class App extends React.Component {
     })
     .then(res => {
       data = res.data;
+      // console.log(res.data.products);
       this.setState({
         details: data
       });
@@ -31,6 +32,9 @@ class App extends React.Component {
 
   render() {
     const { products } = this.state.details;
+    if (!products){
+      return <div>Fetching data...</div>;
+    }
     return (
       <div>
         {products.map((product, id) => (

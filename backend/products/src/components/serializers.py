@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Vendors, Contacts, Products, Categories
+from products.src.models.models import Vendors, Contacts, Products, Categories
 
 class VendorsSerializer(serializers.ModelSerializer):
     class Meta:

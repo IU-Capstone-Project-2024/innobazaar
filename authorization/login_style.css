@@ -1,0 +1,166 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+}
+
+p {
+    font-size: 14px;
+}
+
+#searchbar {
+    border-radius: 15px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+    /*border: 5px solid black;*/
+    overflow: hidden;
+    padding: 5px 10px 5px 10px;
+}
+
+#searchbar input {
+    background: transparent;
+    outline: none;
+    border: 0;
+}
+
+#search-image {
+    height: 1rem;
+    width: 1rem;
+}
+
+#search-button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#favorites_profile img {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+#heart-image {
+    padding-right: 20px;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5vh;
+}
+
+#middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+}
+
+#main-window {
+    overflow: hidden;
+    width: 20rem;
+    box-shadow: darkgray 1px 2px 4px 2px;
+}
+
+#main-content {
+    padding: 15px 20px 30px;
+}
+
+#main-content input {
+    height: 1.6rem;
+    margin-bottom: 20px;
+}
+
+#sign-buttons {
+    display: flex;
+}
+
+#main-content label {
+    font-size: 14px;
+}
+
+#sign-in-button, #sign-up-button {
+    font-size: 17px;
+    padding: 10px 0 10px 0;
+    border: none;
+    background-color: white;
+}
+
+#sign-in-button {
+    border-bottom: 3px solid #FA8232;
+    font-weight: bold;
+}
+
+#sign-up-button {
+    border-bottom: 3px solid lightgray;
+    opacity: 0.6;
+}
+
+#sign-in, #sign-up {
+    flex-basis: 50%;
+}
+
+#email-input, #password-input {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    border: 1px solid lightgray;
+}
+
+#bottom_sign_in {
+    border: none;
+    color: white;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    background-color: #00A486;
+    cursor: pointer;
+}
+
+#footer {
+    height: 20vh;
+}
+
+#header, #footer {
+    background-image: linear-gradient(#40BA21, #00B158);
+}
+
+#header, #middle, #footer {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+#footer-links {
+    width: 150px;
+    justify-content: space-between;
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid white;
+}
+
+#footer-links a {
+    text-decoration: none;
+}
+
+/*#hr_in_footer {*/
+/*    width: 50px;*/
+/*    text-align: end;*/
+/*}*/
+
+.wide_button {
+    width: 100%;
+}
+
+#footer p, #header p {
+    color: white;
+}
+
+
+/*#header, #main-window, #footer, #middle {*/
+/*    border: 2px solid black;*/
+/*}*/

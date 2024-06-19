@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>InnoBazaar | Sign In</title>
+    <link rel="stylesheet" href="login_style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+<div id="header">
+    <div id="logo">
+        <p>innobazaar</p>
+    </div>
+    <form action="https://www.google.com/search" method="get" id="searchbar">
+        <label>
+            <input type="text" placeholder="Search items...">
+        </label>
+        <button type="submit" id="search-button"><img src="images/search.png" id="search-image" alt="search"></button>
+    </form>
+    <div id="favorites_profile">
+        <a href="https://www.vk.com"><img src="images/heart.png" alt="favorite items" id="heart-image"></a>
+        <a href="https://www.youtube.com"><img src="images/profile-picture.png" alt="profile"></a>
+    </div>
+</div>
+<div id="middle">
+    <div id="main-window">
+        <div id="sign-buttons">
+            <div id="sign-in">
+                <button class="wide_button" id="sign-in-button" onclick="{signInClicked()}">
+                    Sign In
+                </button>
+            </div>
+            <div id="sign-up">
+                <button class="wide_button" id="sign-up-button" onclick="{signUpClicked()}">Sign Up</button>
+            </div>
+        </div>
+        <div id="main-content">
+            <label for="email-input" id="email-label">
+                Email address
+                <input type="text" id="email-input">
+            </label>
+            <label for="password-input">
+                Password
+                <input type="text" id="password-input">
+            </label>
+            <button class="wide_button" id="bottom_sign_in">SIGN IN</button>
+        </div>
+    </div>
+    <div>
+    </div>
+</div>
+<div id="footer">
+    <div id="footer-links">
+        <a href="https://www.google.com"><p>Home</p></a>
+        <a href="https://www.google.com"><p>All products</p></a>
+    </div>
+<!--    <hr id="hr_in_footer">-->
+    <p>innobazaar</p>
+    <p>2024 capstone project</p>
+    <p>innobazaar team</p>
+</div>
+</body>
+</html>

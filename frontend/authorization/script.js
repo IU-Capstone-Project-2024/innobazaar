@@ -1,6 +1,12 @@
 function signInClicked() {
-    let sign_in = document.getElementById('sign-in-button');
-    let sign_up = document.getElementById('sign-up-button');
+    let login_window = document.getElementById('login-window');
+    login_window.style.display = 'block';
+
+    let registration_window = document.getElementById('registration-window');
+    registration_window.style.display = 'none';
+
+    let sign_in = document.getElementById('sign-in-button-login');
+    let sign_up = document.getElementById('sign-up-button-login');
 
     sign_in.style.borderBottom = '3px solid #FA8232';
     sign_in.style.fontWeight = 'bold';
@@ -12,8 +18,14 @@ function signInClicked() {
 }
 
 function signUpClicked() {
-    let sign_in = document.getElementById('sign-in-button');
-    let sign_up = document.getElementById('sign-up-button');
+    let login_window = document.getElementById('login-window');
+    login_window.style.display = 'none';
+
+    let registration_window = document.getElementById('registration-window');
+    registration_window.style.display = 'block';
+
+    let sign_in = document.getElementById('sign-in-button-registration');
+    let sign_up = document.getElementById('sign-up-button-registration');
 
     sign_in.style.borderBottom = '3px solid lightgray';
     sign_in.style.opacity = 0.6;
@@ -22,4 +34,5 @@ function signUpClicked() {
     sign_up.style.opacity = 1;
     sign_up.style.borderBottom = '3px solid #FA8232';
     sign_up.style.fontWeight = 'bold';
+
 }

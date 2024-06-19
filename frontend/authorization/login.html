@@ -8,8 +8,9 @@
 </head>
 <body>
 <div id="header">
-    <div id="logo">
-        <p>innobazaar</p>
+    <div class="logo">
+        <img src="images/logo.png" alt="logo">
+        <!--        <p>innobazaar</p>-->
     </div>
     <form action="https://www.google.com/search" method="get" id="searchbar">
         <label>
@@ -23,30 +24,62 @@
     </div>
 </div>
 <div id="middle">
-    <div id="main-window">
-        <div id="sign-buttons">
-            <div id="sign-in">
-                <button class="wide_button" id="sign-in-button" onclick="{signInClicked()}">
+    <div id="login-window">
+        <div class="sign-buttons">
+            <div class="sign-in">
+                <button class="wide_button" id="sign-in-button-login" onclick="{signInClicked()}">
                     Sign In
                 </button>
             </div>
-            <div id="sign-up">
-                <button class="wide_button" id="sign-up-button" onclick="{signUpClicked()}">Sign Up</button>
+            <div class="sign-up">
+                <button class="wide_button" id="sign-up-button-login" onclick="{signUpClicked()}">Sign Up</button>
             </div>
         </div>
-        <div id="main-content">
-            <label for="email-input" id="email-label">
+        <div class="main-content">
+            <label for="email-input-login">
                 Email address
-                <input type="text" id="email-input">
+                <input type="text" class="input_box" id="email-input-login">
             </label>
-            <label for="password-input">
+            <label for="password-input-login">
                 Password
-                <input type="text" id="password-input">
+                <input type="text" class="input_box" id="password-input-login">
             </label>
             <button class="wide_button" id="bottom_sign_in">SIGN IN</button>
         </div>
     </div>
-    <div>
+
+    <div id="registration-window">
+        <div class="sign-buttons">
+            <div class="sign-in">
+                <button class="wide_button" id="sign-in-button-registration" onclick="{signInClicked()}">
+                    Sign In
+                </button>
+            </div>
+            <div class="sign-up">
+                <button class="wide_button" id="sign-up-button-registration" onclick="{signUpClicked()}">Sign Up
+                </button>
+            </div>
+        </div>
+        <div class="main-content">
+            <label for="name-input-registration">
+                Name
+                <input type="text" class="input_box" id="name-input-registration">
+            </label>
+            <label for="email-input-registration">
+                Email address
+                <input type="text" class="input_box" id="email-input-registration">
+            </label>
+            <label for="password-input-registration">
+                Password
+                <input placeholder="Type password..." type="text" class="input_box" id="password-input-registration">
+            </label>
+            <label for="password-input-registration">
+                Confirm password
+                <input type="text" class="input_box" id="password-confirmation">
+            </label>
+            <button class="wide_button" id="bottom_sign_up">SIGN UP AS USER</button>
+            <button class="wide_button" id="bottom_sign_up_vendor">SIGN UP AS VENDOR</button>
+        </div>
     </div>
 </div>
 <div id="footer">
@@ -54,8 +87,10 @@
         <a href="https://www.google.com"><p>Home</p></a>
         <a href="https://www.google.com"><p>All products</p></a>
     </div>
-<!--    <hr id="hr_in_footer">-->
-    <p>innobazaar</p>
+    <div class="logo">
+        <img src="images/logo.png" alt="logo">
+        <!--        <p>innobazaar</p>-->
+    </div>
     <p>2024 capstone project</p>
     <p>innobazaar team</p>
 </div>

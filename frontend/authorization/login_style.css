@@ -4,8 +4,17 @@ body {
     margin: 0;
 }
 
+html * {
+    font-family: Candara, serif;
+}
+
 p {
     font-size: 14px;
+}
+
+.logo img {
+    height: 100%;
+    width: 8rem;
 }
 
 #searchbar {
@@ -15,7 +24,6 @@ p {
     align-items: center;
     justify-content: space-between;
     width: 40%;
-    /*border: 5px solid black;*/
     overflow: hidden;
     padding: 5px 10px 5px 10px;
 }
@@ -50,68 +58,82 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 5vh;
+    height: 7vh;
 }
 
 #middle {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 75vh;
+    height: 68vh;
 }
 
-#main-window {
+#login-window, #registration-window {
     overflow: hidden;
     width: 20rem;
-    box-shadow: darkgray 1px 2px 4px 2px;
+    box-shadow: lightgray 1px 2px 2px 3px;
 }
 
-#main-content {
+
+#registration-window {
+    display: none;
+}
+
+.main-content {
     padding: 15px 20px 30px;
 }
 
-#main-content input {
+.main-content input {
     height: 1.6rem;
+    width: 100%;
     margin-bottom: 20px;
 }
 
-#sign-buttons {
+.sign-buttons {
     display: flex;
 }
 
-#main-content label {
+.main-content label {
     font-size: 14px;
 }
 
-#sign-in-button, #sign-up-button {
+#sign-in-button-login, #sign-up-button-login,
+#sign-in-button-registration, #sign-up-button-registration{
     font-size: 17px;
     padding: 10px 0 10px 0;
     border: none;
     background-color: white;
+    cursor: pointer;
 }
 
-#sign-in-button {
+#sign-in-button-login, #sign-in-button-registration {
     border-bottom: 3px solid #FA8232;
     font-weight: bold;
 }
 
-#sign-up-button {
+#sign-up-button-login, #sign-up-button-registration {
     border-bottom: 3px solid lightgray;
     opacity: 0.6;
 }
 
-#sign-in, #sign-up {
+.sign-in, .sign-up {
     flex-basis: 50%;
 }
 
-#email-input, #password-input {
+.input_box {
     width: 100%;
     margin-bottom: 10px;
     margin-top: 5px;
     border: 1px solid lightgray;
 }
 
-#bottom_sign_in {
+#password-input-registration {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#bottom_sign_in, #bottom_sign_up, #bottom_sign_up_vendor {
     border: none;
     color: white;
     padding-bottom: 5px;
@@ -120,8 +142,17 @@ p {
     cursor: pointer;
 }
 
+#bottom_sign_up_vendor {
+    margin-top: 20px;
+    background-color: #0094AB;
+}
+
+#bottom_sign_in:hover, #bottom_sign_up:hover, #bottom_sign_up_vendor:hover {
+    opacity: 0.8;
+}
+
 #footer {
-    height: 20vh;
+    height: 25vh;
 }
 
 #header, #footer {

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>InnoBazaar | Sign In</title>
+    <link rel="stylesheet" href="login_style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+<div id="header">
+    <div class="logo">
+        <img src="images/logo.png" alt="logo">
+        <!--        <p>innobazaar</p>-->
+    </div>
+    <form action="https://www.google.com/search" method="get" id="searchbar">
+        <label>
+            <input type="text" placeholder="Search items...">
+        </label>
+        <button type="submit" id="search-button"><img src="images/search.png" id="search-image" alt="search"></button>
+    </form>
+    <div id="favorites_profile">
+        <a href="https://www.vk.com"><img src="images/heart.png" alt="favorite items" id="heart-image"></a>
+        <a href="https://www.youtube.com"><img src="images/profile-picture.png" alt="profile"></a>
+    </div>
+</div>
+<div id="middle">
+    <div id="login-window">
+        <div class="sign-buttons">
+            <div class="sign-in">
+                <button class="wide_button" id="sign-in-button-login" onclick="{signInClicked()}">
+                    Sign In
+                </button>
+            </div>
+            <div class="sign-up">
+                <button class="wide_button" id="sign-up-button-login" onclick="{signUpClicked()}">Sign Up</button>
+            </div>
+        </div>
+        <div class="main-content">
+            <label for="email-input-login">
+                Email address
+                <input type="text" class="input_box" id="email-input-login">
+            </label>
+            <label for="password-input-login">
+                Password
+                <input type="text" class="input_box" id="password-input-login">
+            </label>
+            <button class="wide_button" id="bottom_sign_in">SIGN IN</button>
+        </div>
+    </div>
+
+    <div id="registration-window">
+        <div class="sign-buttons">
+            <div class="sign-in">
+                <button class="wide_button" id="sign-in-button-registration" onclick="{signInClicked()}">
+                    Sign In
+                </button>
+            </div>
+            <div class="sign-up">
+                <button class="wide_button" id="sign-up-button-registration" onclick="{signUpClicked()}">Sign Up
+                </button>
+            </div>
+        </div>
+        <div class="main-content">
+            <label for="name-input-registration">
+                Name
+                <input type="text" class="input_box" id="name-input-registration">
+            </label>
+            <label for="email-input-registration">
+                Email address
+                <input type="text" class="input_box" id="email-input-registration">
+            </label>
+            <label for="password-input-registration">
+                Password
+                <input placeholder="Type password..." type="text" class="input_box" id="password-input-registration">
+            </label>
+            <label for="password-input-registration">
+                Confirm password
+                <input type="text" class="input_box" id="password-confirmation">
+            </label>
+            <button class="wide_button" id="bottom_sign_up">SIGN UP AS USER</button>
+            <button class="wide_button" id="bottom_sign_up_vendor">SIGN UP AS VENDOR</button>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <div id="footer-links">
+        <a href="https://www.google.com"><p>Home</p></a>
+        <a href="https://www.google.com"><p>All products</p></a>
+    </div>
+    <div class="logo">
+        <img src="images/logo.png" alt="logo">
+        <!--        <p>innobazaar</p>-->
+    </div>
+    <p>2024 capstone project</p>
+    <p>innobazaar team</p>
+</div>
+</body>
+</html>

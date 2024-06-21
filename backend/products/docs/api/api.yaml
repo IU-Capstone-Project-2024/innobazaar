@@ -1,0 +1,229 @@
+openapi: 3.0.0
+info:
+  title: Innobazaar Api
+  version: 1.0.0
+tags:
+  - name: Front
+    description: Фронтовые ручки
+paths:
+  /front/v1/products:
+    post:
+      tags: 
+        - Front
+      description: Ручка получения товаров с фильтрацией
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - limit
+              properties:
+                category:
+                  $ref: "#/components/schemas/Category"
+                sort_by:
+                  $ref: "#/components/schemas/SortBy"
+                cursor:
+                  type: integer
+                  format: int32
+                  default: 0
+                limit:
+                  type: integer
+                  format: int32
+                  minimum: 0
+                  maximum: 100
+                min_cost:
+                  type: integer
+                  default: 0
+                  format: int32
+                max_cost:
+                  type: integer
+                  format: int32
+
+      responses:
+        200:
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductsResponse"
+
+        400:
+          description: Неправильные данные
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+        500:
+          description: Ошибка на стороне сервера
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /front/v1/item:
+    post:
+      tags: 
+        - Front
+      description: Ручка получения информации о товаре
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - product_id
+                - vendor_id
+              properties:
+                product_id:
+                  type: integer
+                  format: int64
+                vendor_id:
+                  type: integer
+                  format: int64
+
+      responses:
+        200:
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemInfo"
+
+        404:
+          description: Товар или продавец не найден
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+        500:
+          description: Ошибка на стороне сервера
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Category:
+      type: string
+      enum:
+        - all
+        - books
+        - electronics
+        - jewelry
+        - home
+        - shoes
+        - toys
+      default: all
+
+    SortBy:
+      type: string
+      enum:
+        - cheapest
+        - newest
+        - rating
+      default: cheapest
+
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          description: код ответа
+          type: integer
+        message:
+          type: string
+
+    Product:
+      type: object
+      required:
+        - product_id
+        - name
+        - rating
+        - price
+        - vendor_id
+      properties:
+        product_id:
+          type: integer
+        name:
+          type: string
+        rating:
+          type: string
+          format: decimal<1> # 1 цифра после запятой
+        price:
+          type: string
+          format: decimal<2> # 2 цифры после 
+        vendor_id:
+          type: integer
+          format: int64
+
+    ItemInfo:
+      type: object
+      required:
+        - item_id
+        - item_name
+        - description
+        - item_rating
+        - vendor_name
+        - vendor_address
+        - vendor_contacts
+        - vendor_rating
+      properties:
+        item_id:
+          type: integer
+        item_name:
+          type: string
+        description:
+          type: string
+        item_rating:
+          type: string
+          format: decimal<1>
+        vendor_name:
+          type: string
+        vendor_address:
+          type: string
+        vendor_contacts:
+          type: object
+          required:
+            - phone
+          properties:
+            phone:
+              type: string
+            telegram:
+              type: string
+        vendor_rating:
+          type: string
+          format: decimal<1>
+
+    MetaInfo:
+      type: object
+      required:
+        - can_fetch_next
+        - total
+      properties:
+        can_fetch_next:
+          type: boolean
+        total:
+          type: integer
+          description: Количество товаров найденных с такими
+            фильтрами
+
+    ProductsResponse:
+      type: object
+      required:
+        - products
+        - meta_data
+      properties:
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+        meta_info:
+          $ref: "#/components/schemas/MetaInfo"

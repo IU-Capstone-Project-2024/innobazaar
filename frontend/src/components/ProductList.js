@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductCard from './ProductCard';
+import '../App.css';
 
 const products = [
   { id: 1, name: 'Samsung A71', price: 570, image: 'path_to_image', rating: 5 },
@@ -7,7 +8,7 @@ const products = [
   // ДОБАВИТЬ ДАЛЬШЕ
 ];
 
-const ProductList = () => (
+const ProductList = ({ products }) => (
   <div className="product-list">
     {products.map(product => (
       <ProductCard key={product.id} product={product} />

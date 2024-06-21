@@ -2,10 +2,10 @@ import React from 'react';
 
 const ProductCard = ({ product }) => (
   <div className="product-card">
-    <img src={product.image} alt={product.name} />
+    <img src={"https://placehold.co/150x200.png"} alt={product.name} />
+    <p>Rating: {product.rating} stars</p>
     <h4>{product.name}</h4>
     <p>${product.price}</p>
-    <p>Rating: {product.rating} stars</p>
   </div>
 );
 

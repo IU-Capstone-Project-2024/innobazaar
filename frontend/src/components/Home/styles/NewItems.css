@@ -1,0 +1,14 @@
+.new-items {
+    margin: 20px;
+}
+
+.new-items-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.new-items-grid .product-card {
+    flex-basis: 15em;
+    margin: 10px 0;
+}

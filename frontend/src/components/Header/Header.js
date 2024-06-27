@@ -19,7 +19,7 @@ const Header = () => (
     <div className='user_action'>
       <a href="https://www.vk.com"><img src={require("./images/heart.png")} alt="wishlist" className="wishlist" /></a>
       <Link to='/signin'>
-        <a href="https://www.youtube.com" className='login'>
+        <a className='login'>
           <img src={require("./images/login.png")} alt="profile" />
           <p>Sign In</p>
         </a>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from '../ProductCard';
 import './styles/NewItems.css';
+import { Link } from "react-router-dom";
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
@@ -27,7 +28,12 @@ const NewItems = () => {
 
   return (
     <div className="new-items">
-      <h2>New items</h2>
+      <div className='home-control'>
+        <h2>New items</h2>
+        <Link to='/products'>
+          <a><p>All products {'>'}</p></a>
+        </Link>
+      </div>
       {loading ? (
         <div>Loading...</div>
       ) : (

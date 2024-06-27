@@ -11,19 +11,10 @@
     box-shadow: lightgray 1px 2px 2px 3px;
 }
 
-
-#registration-window {
-    display: none;
-}
-
-.main-content {
-    /* padding: 15px 20px 30px; */
-}
-
 .main-content input {
     height: 1.6rem;
     width: 100%;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .sign-buttons {
@@ -43,31 +34,26 @@
     cursor: pointer;
 }
 
-#sign-in-button-login, #sign-in-button-registration {
+#sign-in-button-login, #sign-up-button-registration {
     border-bottom: 3px solid #FA8232;
     font-weight: bold;
 }
 
-#sign-up-button-login, #sign-up-button-registration {
+#sign-up-button-login, #sign-in-button-registration {
     border-bottom: 3px solid lightgray;
     opacity: 0.6;
 }
 
-.sign-in, .sign-up {
+#sign-in, #sign-up {
     flex-basis: 50%;
 }
 
 .input_box {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     margin-top: 5px;
     border: 1px solid lightgray;
-}
-
-#password-input-registration {
-    padding-left: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-left: 5px;
 }
 
 #bottom_sign_in, #bottom_sign_up, #bottom_sign_up_vendor {

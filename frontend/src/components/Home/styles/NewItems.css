@@ -12,3 +12,17 @@
     flex-basis: 15em;
     margin: 10px 0;
 }
+
+.home-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* color: #FA8232; */
+}
+
+.home-control a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+}

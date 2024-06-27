@@ -8,10 +8,10 @@ const Footer = () => (
     <div className='footer_top'>
       <div className="footer-links">
         <Link to='/'>
-        <a href="https://www.google.com"><p>Home</p></a>
+        <a><p>Home</p></a>
         </Link>
         <Link to='/products'>
-        <a href="https://www.google.com"><p>All products</p></a>
+        <a><p>All products</p></a>
         </Link>
       </div>
     </div>

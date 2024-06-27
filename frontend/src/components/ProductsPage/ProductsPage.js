@@ -1,3 +1,4 @@
+// src/components/ProductsPage.js
 import axios from 'axios';
 import React from 'react';
 import Filters from './Filters';
@@ -7,7 +8,7 @@ import './styles/ProductsPage.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-class FilterPage extends React.Component {
+class ProductsPage extends React.Component {
   state = {
     products: [],
     loading: true,
@@ -27,11 +28,16 @@ class FilterPage extends React.Component {
     minPrice: '',
     maxPrice: '',
     searchQuery: '',
-    sortBy: 'cheapest'
+    sortBy: 'cheapest',
+    selectedCategory: 'all' // default selected category
   };
 
   componentDidMount() {
-    this.fetchProducts();
+    if (this.props.selectedCategory) {
+      this.selectCategory(this.props.selectedCategory);
+    } else {
+      this.fetchProducts();
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -67,7 +73,6 @@ class FilterPage extends React.Component {
       }
     })
       .then(res => {
-        console.log(requestData.categories);
         this.setState({
           products: res.data.products,
           loading: false
@@ -123,6 +128,20 @@ class FilterPage extends React.Component {
     });
   };
 
+  selectCategory = (categoryName) => {
+    const { categories } = this.state;
+    const updatedCategories = categories.map(category => ({
+      ...category,
+      selected: category.name === categoryName
+    }));
+
+    this.setState({
+      categories: updatedCategories,
+      selectedCategory: categoryName,
+      loading: true
+    }, this.fetchProducts);
+  }
+
   render() {
     const { products, loading, categories, minPrice, maxPrice, searchQuery, sortBy } = this.state;
 
@@ -144,8 +163,7 @@ class FilterPage extends React.Component {
               <div>Fetching data...</div>
             ) : (
               <>
-              <ProductList products={products} />
-              
+                <ProductList products={products} />
               </>
             )}
           </div>
@@ -156,4 +174,4 @@ class FilterPage extends React.Component {
   }
 }
 
-export default FilterPage;
+export default ProductsPage;

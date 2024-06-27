@@ -19,6 +19,7 @@
   .carousel-item {
     flex: 0 0 20%;
     margin: 0 10px;
+    margin-top: 10px;
     text-align: center;
     border: 1px solid #E4E7E9;
     cursor: pointer;
@@ -36,6 +37,7 @@
   
   .carousel-button {
     background-color: #fff;
+    /* color: #FA8232; */
     border: none;
     cursor: pointer;
     font-size: 2em;

@@ -36,7 +36,7 @@ def create_initial_data(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0001_initial'),  # Ensure this matches the initial migration name
+        ('products', '0002_products'),  # Ensure this matches the initial migration name
     ]
 
     operations = [

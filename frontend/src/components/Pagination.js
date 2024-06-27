@@ -1,13 +1,40 @@
 import React from 'react';
+// import './Pagination.css';
 
-const Pagination = () => (
-  <div className="pagination">
-    <button>«</button>
-    <button>1</button>
-    <button>2</button>
-    <button>3</button>
-    <button>»</button>
-  </div>
-);
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const pages = [];
+
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(i);
+  }
+
+  return (
+    <div className="pagination">
+      <button
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className="pagination-arrow"
+      >
+        &larr;
+      </button>
+      {pages.map(page => (
+        <button
+          key={page}
+          onClick={() => onPageChange(page)}
+          className={`pagination-number ${currentPage === page ? 'active' : ''}`}
+        >
+          {page < 10 ? `0${page}` : page}
+        </button>
+      ))}
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className="pagination-arrow"
+      >
+        &rarr;
+      </button>
+    </div>
+  );
+};
 
 export default Pagination;

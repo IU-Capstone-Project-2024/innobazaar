@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/Authorization.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import {Link, redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import axios from "axios";
 
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -14,7 +14,7 @@ const client = axios.create({
 });
 
 
-function UserRegistration(e) {
+function UserRegistration() {
     console.log('Standard user')
     let name = document.getElementById('name-input-registration').value
     let email = document.getElementById('email-input-registration').value

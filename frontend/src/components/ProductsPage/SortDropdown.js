@@ -1,12 +1,12 @@
 import React from 'react';
 import './styles/Dropdown.css';
 
-const SortDropdown = ({ sortBy, handleSortChange }) => (
+const SortDropdown = ({ sortBy, handleSortChange, searchQuery, handleSearchInputChange }) => (
     <div className='dropdown'>
         <div className='search-dropdown'>
-            <form action="https://www.google.com/search" method="get" className="searchbar_drop">
+            <form method="get" className="searchbar_drop" onSubmit={e => e.preventDefault()}>
                 <label>
-                    <input type="text" placeholder="Search items..." />
+                    <input type="text" placeholder="Search items..." value={searchQuery} onChange={handleSearchInputChange}/>
                 </label>
             </form>
         </div>

@@ -11,6 +11,7 @@ import Footer from '../Footer/Footer';
 class ProductsPage extends React.Component {
   state = {
     products: [],
+    filteredProducts: [],
     loading: true,
     categories: [
       { id: 0, name: 'all', selected: true },
@@ -86,10 +87,18 @@ class ProductsPage extends React.Component {
       });
   };
 
+  filterProducts = () => {
+    const { products, searchQuery } = this.state;
+    const filteredProducts = products.filter(product =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    this.setState({ filteredProducts });
+  }
+
   handleSearchInputChange = (event) => {
     this.setState({
       searchQuery: event.target.value
-    });
+    }, this.filterProducts);
   };
 
   handleCategoryToggle = (categoryId) => {
@@ -143,7 +152,7 @@ class ProductsPage extends React.Component {
   }
 
   render() {
-    const { products, loading, categories, minPrice, maxPrice, searchQuery, sortBy } = this.state;
+    const { filteredProducts, products, loading, categories, minPrice, maxPrice, searchQuery, sortBy } = this.state;
 
     return (
       <div>
@@ -158,12 +167,12 @@ class ProductsPage extends React.Component {
             handleMaxPriceChange={this.handleMaxPriceChange}
           />
           <div className="main-content">
-            <SortDropdown sortBy={sortBy} handleSortChange={this.handleSortChange} />
+            <SortDropdown sortBy={sortBy} handleSortChange={this.handleSortChange} searchQuery={searchQuery} handleSearchInputChange={this.handleSearchInputChange}/>
             {loading ? (
               <div>Fetching data...</div>
             ) : (
               <>
-                <ProductList products={products} />
+                <ProductList products={searchQuery ? filteredProducts : products} />
               </>
             )}
           </div>

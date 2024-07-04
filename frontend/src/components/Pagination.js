@@ -1,7 +1,7 @@
 import React from 'react';
-// import './Pagination.css';
+import './styles/Filters.css'
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination = ({ totalResults }) => {
   const pages = [];
 
   for (let i = 1; i <= totalPages; i++) {
@@ -9,31 +9,8 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   }
 
   return (
-    <div className="pagination">
-      <button
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        className="pagination-arrow"
-      >
-        &larr;
-      </button>
-      {pages.map(page => (
-        <button
-          key={page}
-          onClick={() => onPageChange(page)}
-          className={`pagination-number ${currentPage === page ? 'active' : ''}`}
-        >
-          {page < 10 ? `0${page}` : page}
-        </button>
-      ))}
-      <button
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        className="pagination-arrow"
-      >
-        &rarr;
-      </button>
-    </div>
+    <nav aria-label="Page navigation" className='pagination-nav'>
+    </nav>
   );
 };
 

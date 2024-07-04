@@ -1,116 +1,130 @@
-import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 import './styles/Authorization.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import {Link} from 'react-router-dom';
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { useState } from 'react';
 
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
+function SignIn() {
 
-const client = axios.create({
-    baseURL: "http://127.0.0.1:8000"
-});
+    const baseUrl = 'http://localhost:8000/api';
+    const [formError, setFormError] = useState(false);
+    const [errorMsg, seterrorMsg] = useState('');
+    const [successMsg, setsuccessMsg] = useState('');
+    const [registerFormData, setRegisterFormData] = useState({
+        "first_name": '',
+        'last_name': '',
+        'username': '',
+        'email': '',
+        'mobile': '',
+        'telegram': '',
+        'password': '',
+    });
 
+    const inputHandler = (event) => {
+        setRegisterFormData({
+            ...registerFormData,
+            [event.target.name]: event.target.value
+        });
+        console.log(registerFormData);
+    };
 
-function UserRegistration() {
-    console.log('Standard user')
-    let name = document.getElementById('name-input-registration').value
-    let email = document.getElementById('email-input-registration').value
-    let password = document.getElementById('password-input-registration').value
-    let repeated_password = document.getElementById('password-confirmation').value
-    client.post(
-        "/api/register",
-        {
-            email: email,
-            username: name,
-            password: password
-        }
-    ).then(() => {
-        if (password !== repeated_password) {
-            const registration_error_text = document.getElementById("registration-error")
-            registration_error_text.style.display = 'block'
-            registration_error_text.textContent = "Passwords do not coincide"
-            registration_error_text.style.fontSize = '18px'
-            registration_error_text.style.margin = '0 0 10px 0'
-            registration_error_text.style.padding = '2px 0 2px 0'
-            registration_error_text.style.color = 'red'
-            registration_error_text.style.textAlign = 'center'
-            registration_error_text.style.border = '2px solid red'
-        } else {
-            window.location.replace('/')
-        }
-    })
-        .catch((error) => {
-            if (!email || !name || !password || !repeated_password) {
-                return
-            }
-            const registration_error_text = document.getElementById("registration-error")
-            registration_error_text.style.display = 'block'
-            registration_error_text.textContent = error.response.data[0]
-            registration_error_text.style.fontSize = '18px'
-            registration_error_text.style.margin = '0 0 10px 0'
-            registration_error_text.style.padding = '2px 0 2px 0'
-            registration_error_text.style.color = 'red'
-            registration_error_text.style.textAlign = 'center'
-            registration_error_text.style.border = '2px solid red'
-        })
-}
+    const buttonEnable = (registerFormData.first_name !== '') && (registerFormData.first_name !== '') &&
+        (registerFormData.username !== '') && (registerFormData.email !== '') && (registerFormData.password !== '')
 
+    const submitHandler = (event) => {
+        const formData = new FormData();
+        formData.append('first_name', registerFormData.first_name);
+        formData.append('last_name', registerFormData.last_name);
+        formData.append('username', registerFormData.username);
+        formData.append('email', registerFormData.email);
+        formData.append('mobile', registerFormData.mobile);
+        formData.append('telegram', registerFormData.telegram);
+        formData.append('password', registerFormData.password);
 
-const SignUp = () => (
-    <div>
-        <Header/>
-        <div id="middle">
-            <div id="registration-window">
-                <div className="sign-buttons">
-                    <div className="sign-in-up" id='sign-in'>
-                        <Link to='/signin'>
-                            <button className="wide_button" id="sign-in-button-registration">
-                                Sign In
-                            </button>
-                        </Link>
+        axios.post(baseUrl + '/customer/register/', formData)
+            .then(function (response) {
+                if (response.data.bool === false) {
+                    setFormError(true);
+                    seterrorMsg(response.data.msg);
+                    setsuccessMsg('');
+                } else {
+                    setRegisterFormData({
+                        "first_name": '',
+                        'last_name': '',
+                        'username': '',
+                        'email': '',
+                        'mobile': '',
+                        'telegram': '',
+                        'password': '',
+                    });
+                    setFormError(false);
+                    seterrorMsg('');
+                    setsuccessMsg(response.data.msg);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    };
+
+    return (
+        <>
+            <Header />
+            <div className='container mt-4 mb-4 full-height'>
+                <div className='row'>
+                    <div className='col-md-6 col-12 offset-md-3'>
+                        <div className='card'>
+                            <h4 className='card-header'>Register</h4>
+                            <div className='card-body'>
+                            <p className='text-muted'>*All field are required</p>
+                                {formError &&
+                                    <p className='text-danger'>{errorMsg}</p>
+                                }
+                                {successMsg && <p className='text-success'>{successMsg}</p>}
+                                <form>
+                                    <div className='mb-3'>
+                                        <label for="firstName" className='form-label'>First Name</label>
+                                        <input name='first_name' onChange={inputHandler} value={registerFormData.first_name} type='text' className='form-control' id='firstName' />
+                                    </div>
+                                    <div className='mb-3'>
+                                        <label for="lastName" className='form-label'>Last Name</label>
+                                        <input name='last_name' onChange={inputHandler} value={registerFormData.last_name} type='text' className='form-control' id='lastName' />
+                                    </div>
+                                    <div className='mb-3'>
+                                        <label for="username" className='form-label'>Username</label>
+                                        <input name='username' onChange={inputHandler} value={registerFormData.username} type='text' className='form-control' id='username' />
+                                    </div>
+                                    <div className='mb-3'>
+                                        <label for="email" className='form-label'>Email</label>
+                                        <input name='email' onChange={inputHandler} value={registerFormData.email} type='email' className='form-control' id='email' />
+                                    </div>
+                                    <div className='mb-3'>
+                                        <label for="mobile" className='form-label'>Mobile</label>
+                                        <input name='mobile' onChange={inputHandler} value={registerFormData.mobile} type='number' className='form-control' id='mobile' />
+                                    </div>
+                                    <div className='mb-3'>
+                                        <label for="telegram" className='form-label'>Telegram alias</label>
+                                        <input name='telegram' onChange={inputHandler} value={registerFormData.telegram} type='text' className='form-control' id='telegram' />
+                                    </div>
+                                    <div className='mb-3'>
+                                        <div className='mb-3'>
+                                            <label for='pwd' className='form-label'>Password</label>
+                                            <input type='password' onChange={inputHandler} value={registerFormData.password} name="password" className='form-control' id='pwd' />
+                                        </div>
+                                    </div>
+                                    <button type='button' disabled={!buttonEnable} onClick={submitHandler} className='btn btn-primary'>Submit</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div className="sign-up-up" id='sign-up'>
-                        <button className="wide_button" id="sign-up-button-registration">Sign Up
-                        </button>
-                    </div>
-                </div>
-                <div className="main-content">
-                    <div>
-                        <p id="registration-error" style={{display: undefined}}></p>
-                    </div>
-                    <form id="registration-form" onSubmit={event => event.preventDefault()}>
-                        <label htmlFor="name-input-registration">
-                            Name
-                            <input type="text" className="input_box" id="name-input-registration" required/>
-                        </label>
-                        <label htmlFor="email-input-registration">
-                            Email address
-                            <input type="email" className="input_box" id="email-input-registration" required/>
-                        </label>
-                        <label htmlFor="password-input-registration">
-                            Password
-                            <input placeholder="Type password..." type="password" className="input_box"
-                                   id="password-input-registration" required/>
-                        </label>
-                        <label htmlFor="password-input-registration">
-                            Confirm password
-                            <input type="password" className="input_box" id="password-confirmation" required/>
-                        </label>
-                        <button className="wide_button" id="bottom_sign_up" onClick={UserRegistration}>SIGN UP AS USER
-                        </button>
-                        <button className="wide_button" id="bottom_sign_up_vendor" onClick={UserRegistration}>SIGN UP AS
-                            VENDOR
-                        </button>
-                    </form>
                 </div>
             </div>
-        </div>
-        <Footer/>
-    </div>
-);
+            <Footer />
+        </>
+    );
+}
 
-
-export default SignUp;
+export default SignIn;

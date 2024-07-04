@@ -2,4 +2,12 @@
     padding-left: 18em;
     padding-right: 18em;
 }
-  
+
+.slick-prev:before,
+.slick-next:before {
+    color: #FA8232;
+}
+
+.slick-slide {
+    padding: 0 1em;
+}

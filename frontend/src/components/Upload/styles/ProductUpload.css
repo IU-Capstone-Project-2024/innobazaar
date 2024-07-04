@@ -1,0 +1,56 @@
+/* src/components/ProductUpload.css */
+
+.product-upload {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .product-upload h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .product-upload form div {
+    margin-bottom: 15px;
+  }
+  
+  .product-upload label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .product-upload input,
+  .product-upload textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .product-upload button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .product-upload button:hover {
+    background-color: #218838;
+  }
+  
+  .product-upload p {
+    text-align: center;
+    margin-top: 20px;
+    color: #28a745;
+  }
+  

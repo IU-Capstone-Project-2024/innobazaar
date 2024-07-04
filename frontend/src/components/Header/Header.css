@@ -4,6 +4,21 @@
     text-decoration: none;
 }
 
+.logo-color {
+    color: #40BA21;
+}
+
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #40BA21;
+  
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(64, 186, 33, 0.9), rgba(0, 177, 88, 0.9));
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(64, 186, 33, 0.9), rgba(0, 177, 88, 0.9));
+  }
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -22,6 +37,14 @@
     align-items: center;
     font-size: 2rem;
     font-weight: 700;
+}
+
+.logo-name {
+    color: white;
+}
+
+.login-text {
+    color: white;
 }
 
 .logo_circle {

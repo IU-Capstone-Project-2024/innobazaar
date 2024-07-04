@@ -4,24 +4,16 @@ import { Link } from "react-router-dom";
 import './Footer.css';
 
 const Footer = () => (
-  <div className="footer">
-    <div className='footer_top'>
-      <div className="footer-links">
-        <Link to='/'>
-        <a><p>Home</p></a>
-        </Link>
-        <Link to='/products'>
-        <a><p>All products</p></a>
-        </Link>
-      </div>
-    </div>
-    <div className='footer_bot'>
-      <div className="logo_footer">
-        <div className='logo_circle_footer'>ib</div>
-        <p>innobazaar</p>
-      </div>
-      <p>2024 capstone project</p>
-      <p>innobazaar team</p>
+  <div className=' gradient-custom'>
+    <div class="container">
+      <footer class="py-3 mt-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+          <li class="nav-item"><Link to="/" class="nav-link px-2 text-white">Home</Link></li>
+          <li class="nav-item"><Link to="/products" class="nav-link px-2 text-white">All Products</Link></li>
+          <li class="nav-item"><Link to="/dashboard" class="nav-link px-2 text-white">Dashboard</Link></li>
+        </ul>
+        <p class="text-center text-white">© 2024 Innobazaar, Inc</p>
+      </footer>
     </div>
   </div>
 );

@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/Dropdown.css';
 
 const SortDropdown = ({ sortBy, handleSortChange, searchQuery, handleSearchInputChange }) => (
-    <div className='dropdown'>
+    <div className='dropdownn'>
         <div className='search-dropdown'>
             <form method="get" className="searchbar_drop" onSubmit={e => e.preventDefault()}>
                 <label>
@@ -11,7 +11,6 @@ const SortDropdown = ({ sortBy, handleSortChange, searchQuery, handleSearchInput
             </form>
         </div>
         <div className="sort-dropdown">
-            <label>Sort by:</label>
             <select value={sortBy} onChange={handleSortChange}>
                 <option value="newest">Newest</option>
                 <option value="cheapest">Cheapest</option>

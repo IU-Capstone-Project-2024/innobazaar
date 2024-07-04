@@ -17,7 +17,7 @@ def create_initial_data(apps, schema_editor):
     Contacts.objects.create(vendor=vendor2, type="phone", value="0987654321")
 
     # Categories list
-    categories_list = ['electronics', 'books', 'toys', 'accessories', 'handicrafts', 'women\'s shoes', 'men\'s clothes', 'kid\'s shoes', 'jewelry', 'home & kitchen']
+    categories_list = ['electronics', 'books', 'toys', 'accessories', 'handicrafts', 'women\'s shoes', 'women\'s clothes', 'men\'s clothes', 'men\'s shoes', 'kid\'s shoes', 'kid\'s clothes', 'jewelry', 'home & kitchen']
 
     # Create Products and Categories
     for i in range(1, 101):

@@ -1,84 +1,95 @@
-import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+import React, { useContext } from 'react';
 import './styles/Authorization.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { AuthContext } from '../AuthContext';
+import { useState } from 'react';
 
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
+function SignIn() {
 
-const client = axios.create({
-    baseURL: "http://127.0.0.1:8000"
-});
+    const baseUrl = 'http://localhost:8000/api';
+    const [formError, setFormError] = useState(false);
+    const [errorMsg, seterrorMsg] = useState('');
+    const [loginFormData, setloginFormData] = useState({
+        "username": '',
+        'password': ''
+    });
 
-function HandleSubmit(e) {
-    e.preventDefault();
-    console.log(e)
-    let email = document.getElementById('email-input-login').value
-    let password = document.getElementById('password-input-login').value
-
-    client.post(
-        "/api/login",
-        {
-            email: email,
-            password: password
-        }
-    ).then(() => {
-        window.location.replace('/')
-    })
-        .catch((error) => {
-            const login_error_text = document.getElementById("login-error")
-            login_error_text.style.display = 'block'
-            login_error_text.textContent = error.response.data[0]
-            login_error_text.style.fontSize = '18px'
-            login_error_text.style.margin = '0 0 10px 0'
-            login_error_text.style.padding = '2px 0 2px 0'
-            login_error_text.style.color = 'red'
-            login_error_text.style.textAlign = 'center'
-            login_error_text.style.border = '2px solid red'
+    const inputHandler = (event) => {
+        setloginFormData({
+            ...loginFormData,
+            [event.target.name]: event.target.value
         })
-}
+    };
 
-const SignIn = () => (
-    <div>
-        <Header/>
-        <div id="middle">
-            <div id="login-window">
-                <div className="sign-buttons">
-                    <div className="sign-in-in" id='sign-in'>
-                        <button className="wide_button" id="sign-in-button-login">
-                            Sign In
-                        </button>
+    const submitHandler = (event) => {
+        const formData = new FormData();
+        formData.append('username', loginFormData.username);
+        formData.append('password', loginFormData.password);
+
+        axios.post(baseUrl + '/customer/login/', formData)
+            .then(function (response) {
+                if (response.data.bool == false) {
+                    setFormError(true);
+                    seterrorMsg(response.data.msg);
+                } else {
+                    localStorage.setItem('customer_login', true);
+                    localStorage.setItem('customer_id', response.data.user_id);
+                    localStorage.setItem('customer_username', response.data.user);
+                    setFormError(false);
+                    seterrorMsg('');
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    };
+
+    const checkCustomer = localStorage.getItem('customer_login');
+    if (checkCustomer) {
+        window.location.href='/dashboard'
+    }
+
+    const buttonEnable = (loginFormData.username != '') && (loginFormData.password != '')
+
+
+    return (
+        <>
+            <Header />
+            <div className='container mt-4 mb-4 full-height'>
+                <div className='row'>
+                    <div className='col-md-6 col-12 offset-md-3'>
+                        <div className='card'>
+                            <h4 className='card-header'>Login</h4>
+                            <div className='card-body'>
+                                {formError &&
+                                    <p className='text-danger'>{errorMsg}</p>
+                                }
+                                <form>
+                                    <div className='mb-3'>
+                                        <label for="username" className='form-label'>Username</label>
+                                        <input type='text' name="username" value={loginFormData.username} onChange={inputHandler} className='form-control' id='username' />
+                                    </div>
+                                    <div className='mb-3'>
+                                        <div className='mb-3'>
+                                            <label for='pwd' className='form-label'>Password</label>
+                                            <input type='password' name="password" value={loginFormData.password} onChange={inputHandler} className='form-control' id='pwd' />
+                                        </div>
+                                    </div>
+                                    <button type='button' disabled={!buttonEnable} onClick={submitHandler} className='btn btn-primary'>Submit</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div className="sign-up-in" id='sign-up'>
-                        <Link to='/signup'>
-                            <button className="wide_button" id="sign-up-button-login">Sign Up</button>
-                        </Link>
-                    </div>
-                </div>
-                <div className="main-content">
-                    <div>
-                        <p id="login-error" style={{display: "none"}}></p>
-                    </div>
-                    <form id="login-form" onSubmit={HandleSubmit}>
-                        <label htmlFor="email-input-login">
-                            Email address
-                            <input type="email" className="input_box" id="email-input-login" required/>
-                        </label>
-                        <label htmlFor="password-input-login">
-                            Password
-                            <input type="password" className="input_box" id="password-input-login" required/>
-                        </label>
-                        <button className="wide_button" id="bottom_sign_in">SIGN IN</button>
-                    </form>
                 </div>
             </div>
-        </div>
-        <Footer/>
-    </div>
-);
-
+            <Footer />
+        </>
+    );
+}
 
 export default SignIn;

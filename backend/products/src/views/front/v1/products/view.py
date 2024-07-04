@@ -15,8 +15,6 @@ class ProductListView(APIView):
             min_cost = data.get('min_cost', 0)
             max_cost = data.get('max_cost')
 
-            print(data.get('category'), limit, min_cost, max_cost)
-
             products = Products.objects.only('product_id', 'name', 'rating', 'price', 'vendor')
 
             if category != 'all':

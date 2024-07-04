@@ -1,39 +1,39 @@
 .filters {
-    display: flex;
-    flex-direction: column;
-    /* justify-content: space-between; */
-    /* height: 20em; */
-    width: 250px;
-    padding: 20px;
-    /* background-color: #f9f9f9; */
-    border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  /* height: 20em; */
+  width: 250px;
+  padding: 20px;
+  /* background-color: #f9f9f9; */
+  border-right: 1px solid #ddd;
 }
 
 .filters h2 {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .price-filter {
-    margin-top: 15px;
-    border-top: 1px solid;
-    color: #191C1F;
+  margin-top: 15px;
+  border-top: 1px solid;
+  color: #191C1F;
 }
 
 .min-max {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .min-max input {
-    width: 8em;
-    height: 2em;
-    padding-left: 5px;
+  width: 8em;
+  height: 2em;
+  padding-left: 5px;
 }
 
 .price-filter div {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 
@@ -50,66 +50,106 @@
 
 /* Customize the label (the container) */
 .category {
-    display: block;
-    position: relative;
-    padding-left: 1.5em;
-    margin-bottom: 12px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  /* Hide the browser's default radio button */
-  .category input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  /* Create a custom radio button */
-  .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 1.2em;
-    width: 1.2em;
-    background-color: #fff;
-    border: 1px solid #C9CFD2;
-    border-radius: 50%;
-  }
-  
-  /* On mouse-over, add a grey background color */
-  .category:hover input ~ .checkmark {
-    background-color: #ccc;
-  }
-  
-  /* When the radio button is checked, add a blue background */
-  .category input:checked ~ .checkmark {
-    background-color: #FA8232;
-  }
-  
-  /* Create the indicator (the dot/circle - hidden when not checked) */
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  /* Show the indicator (dot/circle) when checked */
-  .category input:checked ~ .checkmark:after {
-    display: block;
-  }
-  
-  /* Style the indicator (dot/circle) */
-  .category .checkmark:after {
-    top: 5px;
-    left: 5px;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: white;
-  }
+  display: block;
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.category input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.2em;
+  width: 1.2em;
+  background-color: #fff;
+  border: 1px solid #C9CFD2;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.category:hover input~.checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.category input:checked~.checkmark {
+  background-color: #FA8232;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.category input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.category .checkmark:after {
+  top: 5px;
+  left: 5px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: white;
+}
+
+.pagination-nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+.pagination {
+  margin-top: 3em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  height: 2em;
+  border-radius: 6px;
+  width: auto;
+}
+
+.page-item {
+  text-decoration: none;
+  /* border: 1px solid lightblue; */
+  width: 3em;
+  height: 2em;
+  display: flex;
+  cursor: pointer;
+}
+
+.page-link {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  color: #FA8232;
+  font-weight: bold;
+}
+
+.page-link:hover {
+  background-color: lightgrey;
+}

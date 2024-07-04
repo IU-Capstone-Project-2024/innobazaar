@@ -1,173 +1,109 @@
-// src/components/ProductsPage.js
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Filters from './Filters';
 import ProductList from '../ProductList';
 import SortDropdown from './SortDropdown';
+import Pagination from './Pagination';
 import './styles/ProductsPage.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import { useParams } from 'react-router-dom';
 
-class ProductsPage extends React.Component {
-  state = {
-    products: [],
-    filteredProducts: [],
-    loading: true,
-    categories: [
-      { id: 0, name: 'all', selected: true },
-      { id: 1, name: 'books', selected: false },
-      { id: 2, name: 'electronics', selected: false },
-      { id: 3, name: 'accessories', selected: false },
-      { id: 4, name: 'handicrafts', selected: false },
-      { id: 5, name: 'women\'s shoes', selected: false },
-      { id: 6, name: 'men\'s clothes', selected: false },
-      { id: 8, name: 'kid\'s shoes', selected: false },
-      { id: 9, name: 'toys', selected: false },
-      { id: 10, name: 'jewelry', selected: false },
-      { id: 11, name: 'home & kitchen', selected: false },
-    ],
-    minPrice: '',
-    maxPrice: '',
-    searchQuery: '',
-    sortBy: 'cheapest',
-    selectedCategory: 'all' // default selected category
+const ProductsPage = () => {
+  const url = 'http://localhost:8000/api';
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [totalResults, setTotalResults] = useState(0);
+  const [CategoryData, setCategoryData] = useState([]);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768); // New state
+
+  useEffect(() => {
+    fetchProducts();
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  console.log(isSmallScreen);
+
+  useEffect(() => {
+    fetchProducts(url + '/products/');
+  }, []);
+
+  const fetchProducts = (fetchUrl) => {
+    fetch(fetchUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data.results);
+        setTotalResults(data.count);
+      });
+    setLoading(false);
   };
 
-  componentDidMount() {
-    if (this.props.selectedCategory) {
-      this.selectCategory(this.props.selectedCategory);
-    } else {
-      this.fetchProducts();
-    }
-  }
+  const filterProducts = () => {
+    const filtered = products.filter(product =>
+      product.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+  };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.categories !== this.state.categories ||
-      prevState.minPrice !== this.state.minPrice ||
-      prevState.maxPrice !== this.state.maxPrice ||
-      prevState.searchQuery !== this.state.searchQuery ||
-      prevState.sortBy !== this.state.sortBy
-    ) {
-      this.fetchProducts();
-    }
-  }
+  useEffect(() => {
+    filterProducts();
+  }, [searchQuery, products]);
 
-  fetchProducts = () => {
-    const { categories, minPrice, maxPrice, searchQuery, sortBy } = this.state;
-    let cat = categories.filter(category => category.selected).map(category => category.name);
-    if (!cat) {
-      cat = 'all';
-    }
-    let requestData = {
-      limit: 20,
-      searchQuery,
-      category: cat[0],
-      min_cost: minPrice !== '' ? parseFloat(minPrice) : undefined,
-      max_cost: maxPrice !== '' ? parseFloat(maxPrice) : undefined,
-      sort_by: sortBy
-    };
+  useEffect(() => {
+    fetchCategory(url + '/categories/');
+  }, []);
 
-    axios.post('http://localhost:8000/front/v1/products', requestData, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => {
-        this.setState({
-          products: res.data.products,
-          loading: false
-        });
-      })
-      .catch(err => {
-        console.error('Error fetching data:', err);
-        this.setState({
-          loading: false
-        });
+  const fetchCategory = (fetchUrl) => {
+    fetch(fetchUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        setCategoryData(data.data);
       });
   };
 
-  filterProducts = () => {
-    const { products, searchQuery } = this.state;
-    const filteredProducts = products.filter(product =>
-      product.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    this.setState({ filteredProducts });
-  }
+  console.log(CategoryData);
 
-  handleSearchInputChange = (event) => {
-    this.setState({
-      searchQuery: event.target.value
-    }, this.filterProducts);
-  };
-
-  handleCategoryToggle = (categoryId) => {
-    const { categories } = this.state;
-    const updatedCategories = categories.map(category => {
-      if (category.id === categoryId) {
-        return { ...category, selected: !category.selected };
-      } else {
-        return { ...category, selected: false };
-      }
-    });
-
-    const selectedCategory = updatedCategories.find(category => category.id === categoryId && category.selected);
-
-    this.setState({
-      categories: updatedCategories,
-      selectedCategory: selectedCategory || null
-    });
-  };
-
-  handleMinPriceChange = (event) => {
-    this.setState({
-      minPrice: event.target.value
-    });
-  };
-
-  handleMaxPriceChange = (event) => {
-    this.setState({
-      maxPrice: event.target.value
-    });
-  };
-
-  handleSortChange = (event) => {
-    this.setState({
-      sortBy: event.target.value
-    });
-  };
-
-  selectCategory = (categoryName) => {
-    const { categories } = this.state;
-    const updatedCategories = categories.map(category => ({
-      ...category,
-      selected: category.name === categoryName
-    }));
-
-    this.setState({
-      categories: updatedCategories,
-      selectedCategory: categoryName,
-      loading: true
-    }, this.fetchProducts);
-  }
-
-  render() {
-    const { filteredProducts, products, loading, categories, minPrice, maxPrice, searchQuery, sortBy } = this.state;
-
-    return (
-      <div>
-        <Header />
-        <div className="app-container">
-          <Filters
-            categories={categories}
-            handleCategoryToggle={this.handleCategoryToggle}
-            minPrice={minPrice}
-            maxPrice={maxPrice}
-            handleMinPriceChange={this.handleMinPriceChange}
-            handleMaxPriceChange={this.handleMaxPriceChange}
-          />
-          <div className="main-content">
-            <SortDropdown sortBy={sortBy} handleSortChange={this.handleSortChange} searchQuery={searchQuery} handleSearchInputChange={this.handleSearchInputChange}/>
+  return (
+    <div>
+      <Header />
+      <div className="app container mt-4">
+        <div className='row'>
+          <div className={`col-2 border-end ${isSmallScreen ? 'd-none' : 'd-block'}`}>
+            <h3 className='mb-3'>Category</h3>
+            {
+              CategoryData.map((item, index) => {
+                return (
+                  <div className="form-check" key={index}>
+                    <input className="form-check-input" type="radio" name="flexRadioDefault" id={`flexRadioDefault${index}`} value={item.id} />
+                    <label className="form-check-label" htmlFor={`flexRadioDefault${index}`}>
+                      {item.title}
+                    </label>
+                  </div>
+                );
+              })
+            }
+          </div>
+          <div className={`col-12 ${isSmallScreen ? 'd-block mb-4' : 'd-none'}`}>
+            <select className="form-select" aria-label="Category select">
+              <option selected>Select Category</option>
+              {
+                CategoryData.map((item, index) => {
+                  return (
+                    <option key={index} value={item.id}>{item.title}</option>
+                  );
+                })
+              }
+            </select>
+          </div>
+          <div className="col-md-10 col-12">
             {loading ? (
               <div>Fetching data...</div>
             ) : (
@@ -177,10 +113,9 @@ class ProductsPage extends React.Component {
             )}
           </div>
         </div>
-        <Footer />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default ProductsPage;

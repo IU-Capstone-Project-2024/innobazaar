@@ -1,58 +1,57 @@
 .category-carousel {
-    text-align: center;
-    margin: 20px;
-  }
-  
-  .carousel-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .carousel {
-    display: flex;
-    overflow: hidden;
-    width: 80%;
-  }
-  
-  .carousel-item {
-    flex: 0 0 20%;
-    margin: 0 10px;
-    margin-top: 10px;
-    text-align: center;
-    border: 1px solid #E4E7E9;
-    cursor: pointer;
-  }
-  
-  .carousel-item img {
-    width: 150px;
-    height: 150px;
-    object-fit: contain;
-  }
-  
-  .carousel-item p {
-    margin-top: 10px;
-  }
-  
-  .carousel-button {
-    background-color: #fff;
-    /* color: #FA8232; */
-    border: none;
-    cursor: pointer;
-    font-size: 2em;
-    padding: 10px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-  }
-  
-  .prev-button {
-    left: 10px;
-  }
-  
-  .next-button {
-    right: 10px;
-  }
-  
+  text-align: center;
+  margin: 20px;
+}
+
+.carousel-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousell {
+  display: flex;
+  overflow: hidden;
+  width: 80%;
+}
+
+.carousel-item-own {
+  flex: 0 0 20%;
+  margin: 0 10px;
+  margin-top: 10px;
+  text-align: center;
+  border: 1px solid #E4E7E9;
+  cursor: pointer;
+}
+
+.carousel-item-own img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.carousel-item-own p {
+  margin-top: 10px;
+}
+
+.carousel-button {
+  background-color: #fff;
+  /* color: #FA8232; */
+  border: none;
+  cursor: pointer;
+  font-size: 2em;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.prev-button {
+  left: 10px;
+}
+
+.next-button {
+  right: 10px;
+}

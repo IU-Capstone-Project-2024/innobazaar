@@ -40,9 +40,9 @@ const Slideshow = () => {
       <h1>Shop with categories</h1>
       <div className="carousel-container">
         <button className="carousel-button prev-button" onClick={handlePrev}>&lt;</button>
-        <div className="carousel">
+        <div className="carousell">
           {visibleCategories.map(category => (
-            <div key={category.id} className="carousel-item" onClick={() => handleCategoryClick(category)}>
+            <div key={category.id} className="carousel-item-own" onClick={() => handleCategoryClick(category)}>
               <img src={require(`${category.image}`)} alt={category.name} />
               <p>{category.name}</p>
             </div>

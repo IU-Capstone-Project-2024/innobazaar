@@ -4,6 +4,8 @@ import Header from '../Header/Header';
 import Sidebar from './Sidebar';
 import Footer from '../Footer/Footer';
 
+const API_KEY = 'YOUR_API';
+
 const ProductDescriptionGenerator = () => {
     const [productName, setProductName] = useState('');
     const [productKeywords, setProductKeywords] = useState('');
@@ -20,7 +22,7 @@ const ProductDescriptionGenerator = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer YOUR_API`
+                    'Authorization': `Bearer ${API_KEY}`
                 },
                 body: JSON.stringify({
                     model: "gpt-3.5-turbo",
